@@ -16,6 +16,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const toggleSignInForm = () => {
     setIsSignForm(!isSignInForm);
   };
@@ -26,14 +27,12 @@ const Login = () => {
 
   const handleButtonClick = () => {
     // Safely check the refs and access their values
-
     const nameValue = name.current ? name.current.value : "";
     const emailValue = email.current ? email.current.value : "";
     const passwordValue = password.current ? password.current.value : "";
 
     // Validate the form data
     const message = checkValidData(emailValue, passwordValue);
-
     if (message) return;
 
     if (!isSignInForm) {
@@ -42,20 +41,10 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: nameValue,
-            photoURL:
-              "https://lh3.googleusercontent.com/a/ACg8ocKI_Ax6LoUzCBoFuVyQ1Gfa8uMwKmEfc-I4XsYiH249fHMkm53p=s96-c",
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/12824231?v=4",
           })
             .then(() => {
-              const { uid, email, displayName, photoURL } = auth.currentUser;
-              dispatch(
-                addUser({
-                  uid: uid,
-                  email: email,
-                  displayName: displayName ? displayName : "",
-                  photoURL: photoURL ? photoURL : "",
-                })
-              );
               navigate("/browse");
             })
             .catch((error) => {
@@ -73,6 +62,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
+          console.log(user);
           navigate("/browse");
         })
         .catch((error) => {
@@ -135,4 +125,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;
