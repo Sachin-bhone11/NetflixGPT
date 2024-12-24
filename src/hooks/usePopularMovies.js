@@ -5,7 +5,7 @@ import { API_OPTIONS } from "../utils/constants";
 
 const usePopularMovies = () => {
   const dispatch = useDispatch();
-
+  const popularMovies = useSelector((store) => store.movies.popularMovies);
   //get movies
   const getPopularMovies = async () => {
     const url =
@@ -16,7 +16,9 @@ const usePopularMovies = () => {
   };
 
   useEffect(() => {
-    getPopularMovies();
+    if (!popularMovies) {
+      getPopularMovies();
+    }
   }, []);
 };
 

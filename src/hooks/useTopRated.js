@@ -5,7 +5,7 @@ import { API_OPTIONS } from "../utils/constants";
 
 const useTopRated = () => {
   const dispatch = useDispatch();
-
+  const topRatedMovies = useSelector((store) => store.movies.topRatedMovies);
   //get movies
   const getTopRatedMovies = async () => {
     const url =
@@ -16,7 +16,7 @@ const useTopRated = () => {
   };
 
   useEffect(() => {
-    getTopRatedMovies();
+    !topRatedMovies && getTopRatedMovies();
   }, []);
 };
 

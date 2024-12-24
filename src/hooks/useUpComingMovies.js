@@ -5,7 +5,7 @@ import { API_OPTIONS } from "../utils/constants";
 
 const useUpComingMovies = () => {
   const dispatch = useDispatch();
-
+  const upComingMovies = useSelector((store) => store.movies.upcomingMovieRes);
   //get movies
   const getUpcomingMovies = async () => {
     const url =
@@ -16,7 +16,7 @@ const useUpComingMovies = () => {
   };
 
   useEffect(() => {
-    getUpcomingMovies();
+    !upComingMovies && getUpcomingMovies();
   }, []);
 };
 
