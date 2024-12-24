@@ -40,6 +40,9 @@
 - GPT Search Page
 - GPT Search Bar
 - Multi-language Feature in our App
+- add search funcinality
+- openai is not working so i use tmdb search api to store movie in store
+- search movie in UI
 
 # Features
 
